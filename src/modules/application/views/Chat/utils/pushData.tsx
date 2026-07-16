@@ -1,11 +1,12 @@
 // Resources
 import { type ChatProps } from '../../../utils/infoChat.tsx';
 import Swal from 'sweetalert2';
+import route from '@shared/enviromentUrl.ts'
 
 import { socket } from '../../../viewApp.tsx';
 
 async function pushData(copyChat: ChatProps) {
-    const fecth = await fetch('http://localhost:3000/api/chat/edit', {
+    const fecth = await fetch(`${route}api/chat/edit`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

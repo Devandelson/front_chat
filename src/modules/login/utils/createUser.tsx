@@ -1,5 +1,7 @@
+import route from '@shared/enviromentUrl.ts'
+
 export async function createUser(name: string, password: string) {
-    const enpointData = await fetch('http://localhost:3000/api/login/create', {
+    const enpointData = await fetch(`${route}api/login/create`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"

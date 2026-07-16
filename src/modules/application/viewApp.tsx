@@ -1,6 +1,7 @@
 // Components ==================================================
 import Menu from "./views/Menu/menu.tsx";
 import Chat from "./views/Chat/Chat.tsx";
+import route from '@shared/enviromentUrl.ts'
 
 // Hooks ======================================================
 import { useEffect, useState } from "react";
@@ -12,7 +13,7 @@ import Swal from "sweetalert2";
 import io from 'socket.io-client'
 
 // ----- execute the environment
-export const socket = io('http://localhost:3000/', {
+export const socket = io(route, {
     withCredentials: true,
     autoConnect: false,
 });
@@ -37,7 +38,7 @@ export default function ViewApp() {
             sendUser: () => void,
             anotherMessages: () => void
         ) {
-            const response = await fetch('http://localhost:3000/api/chat/chats', {
+            const response = await fetch(`${route}api/chat/chats`, {
                 method: 'GET',
                 credentials: 'include'
             });

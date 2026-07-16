@@ -1,9 +1,10 @@
 import Swal from 'sweetalert2';
 import { type ChatProps } from '../../../utils/infoChat.tsx';
+import route from '@shared/enviromentUrl.ts'
 
 async function createChatRequest(nombre_chat: string) {
     try {
-        const res = await fetch('http://localhost:3000/api/chat/create', {
+        const res = await fetch(`${route}api/chat/create`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nombre_chat }),
@@ -19,7 +20,7 @@ async function createChatRequest(nombre_chat: string) {
 
 async function deleteChatRequest(nombre_chat: string) {
     try {
-        const res = await fetch('http://localhost:3000/api/chat/delete', {
+        const res = await fetch(`${route}api/chat/delete`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nombre_chat }),

@@ -2,6 +2,7 @@
 import { type ChatProps } from '../../../utils/infoChat.tsx';
 import Swal from 'sweetalert2'
 import { socket } from '../../../viewApp.tsx';
+import route from '@shared/enviromentUrl.ts'
 
 interface handleProps {
     indexMessage: number,
@@ -81,7 +82,7 @@ export default function handleDeleteMessage({ indexMessage, chat, name }: handle
 
 async function ManageDeleteMessage(nombre_chat: string, conversacion?: ChatProps['conversations']) {
     try {
-        const FecthDelete = await fetch('http://localhost:3000/api/chat/edit', {
+        const FecthDelete = await fetch(`${route}api/chat/edit`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
