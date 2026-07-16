@@ -47,14 +47,16 @@ export default function ViewApp() {
             if (result.status) {
                 socket.auth = { username: localStorage.getItem('userName') ?? '' };
                 socket.connect();
-                
+
                 const { data } = result;
                 const convertData: ChatProps[] = data.map((
-                    item: { nombre_chat: string, conversaciones: string },
+                    item: { nombre_chat: string, conversaciones: string | object },
                     index: number) => {
                     return {
                         name: item.nombre_chat,
-                        conversations: JSON.parse(item.conversaciones),
+                        conversations: typeof item.conversaciones === 'string'
+                            ? JSON.parse(item.conversaciones)
+                            : item.conversaciones,
                         state: (index == 0 ? true : false)
                     };
                 });
