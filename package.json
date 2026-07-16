@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Devandelson.github.io/front_chatOnline/",
+  "homepage": "https://Devandelson.github.io/front_chat/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
