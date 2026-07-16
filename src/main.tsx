@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename="/front_chat">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </StrictMode>,
