@@ -10,7 +10,7 @@ import Header from './Components/header.tsx';
 import Message from "./Components/Message.tsx";
 
 // Hooks ======================================================
-import { useState, type ChangeEvent, type HtmlHTMLAttributes, type InputEvent } from "react";
+import { useState } from "react";
 
 export default function Chat({ chat, users }: { chat: ChatProps, users: Array<string> }) {
     const [input, setInput] = useState<string>('');
