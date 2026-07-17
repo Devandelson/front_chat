@@ -10,7 +10,7 @@ import Header from './Components/header.tsx';
 import Message from "./Components/Message.tsx";
 
 // Hooks ======================================================
-import { useState } from "react";
+import { useState, type ChangeEvent, type HtmlHTMLAttributes, type InputEvent } from "react";
 
 export default function Chat({ chat, users }: { chat: ChatProps, users: Array<string> }) {
     const [input, setInput] = useState<string>('');
@@ -47,6 +47,19 @@ export default function Chat({ chat, users }: { chat: ChatProps, users: Array<st
     };
     const activeUsers = users.length;
 
+    function handleChangeInput(e: React.KeyboardEvent<HTMLInputElement>) {
+        e.preventDefault();
+        const tecla = e.key;
+        if (tecla === 'Enter') {
+            handleSendMessage(
+                String(userActives),
+                input,
+                setInput,
+                chat
+            );
+        };
+    }
+
     return (
         <section className="grid grid-rows-[auto_1fr_auto] bg-gray-900 border-6 border-gray-700 rounded-2xl overflow-hidden">
             <Header name={chat.name} active={activeUsers} invites={users}></Header>
@@ -58,7 +71,7 @@ export default function Chat({ chat, users }: { chat: ChatProps, users: Array<st
                 exit="initial"
                 variants={containerVariants}
             >
-                <AnimatePresence mode="wait">
+                <AnimatePresence>
                     {chat.conversations.map((data, index) => {
                         const dataMessage = {
                             name: data.user,
@@ -84,6 +97,7 @@ export default function Chat({ chat, users }: { chat: ChatProps, users: Array<st
             <footer className="relative px-2">
                 <div className="bg-gray-700 text-white p-3 rounded-t-xl flex items-center gap-2">
                     <input type="text" placeholder="Escribe..." className="w-full outline-none"
+                        onKeyDown={(e) => {handleChangeInput(e)}}
                         value={input} onChange={(e) => setInput(e.target.value)}
                     />
                     <span className="h-5 w-0.5 bg-gray-600 block"></span>

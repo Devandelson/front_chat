@@ -22,7 +22,6 @@ export default function Login() {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log(inputsDates.name, inputsDates.password);
 
         Swal.fire({
             title: 'Verificando el usuario...',
