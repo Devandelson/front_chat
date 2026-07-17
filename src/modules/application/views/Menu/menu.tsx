@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import routeUrl from '@shared/enviromentUrl.ts'
 
 // components =============================================
 import Header from "./components/header.tsx";
@@ -46,7 +47,7 @@ function Menu({ chat, setChat, users }: MenuProps) {
     const Role = String(localStorage.getItem('role'));
 
     async function handleSingOut() {
-        const route = await fetch('http://localhost:3000/api/login/logout', {
+        const route = await fetch(`${routeUrl}api/login/logout`, {
             method: 'GET'
         });
         const result = await route.json();
