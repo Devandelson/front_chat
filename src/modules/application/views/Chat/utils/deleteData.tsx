@@ -42,24 +42,26 @@ export default function handleDeleteMessage({ indexMessage, chat, name }: handle
 
         // Build the new array up front — no side effects hidden inside setChat
         const conversacionActualizada = chat.conversations.filter((_, idx) => idx !== indexMessage);
+        Swal.fire({
+            title: 'Eliminando la información...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
 
         ManageDeleteMessage(chat.name, conversacionActualizada).then((exito) => {
             if (!exito) {
-                return Swal.fire({
+                Swal.close(); 
+                Swal.fire({
                     title: "!",
                     text: "No se pudo eliminar el mensaje, recargue en intente de nuevo.",
                     icon: "error"
                 });
+                return;
             }
 
-            Swal.fire({
-                title: 'Eliminando la información...',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
 
             // Pass the specific chat with the change conversation (so, the chat that one user delete a message).
             const buildUpdateChat: ChatProps = {
@@ -69,7 +71,7 @@ export default function handleDeleteMessage({ indexMessage, chat, name }: handle
             }
             // emit the change.
             socket.emit('sendUpdateChat', buildUpdateChat);
-            
+
             Swal.close();
             Swal.fire({
                 title: "¡Eliminado!",
